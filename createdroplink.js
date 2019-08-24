@@ -1,8 +1,10 @@
 const AWS = require("aws-sdk");
+var s3 = new AWS.S3();
 var dynamodb = new AWS.DynamoDB.DocumentClient({ region: "ap-southeast-1" });
 
 exports.handler = (event, context, callback) => {
   var ownerUsername = event.body.ownerUsername;
+  var ownerEmail = event.body.ownerEmail;
   var droplinkName = event.body.droplinkName;
   var droplinkId = Date.now() + "_" + ownerUsername;
 
@@ -11,6 +13,7 @@ exports.handler = (event, context, callback) => {
     Item: {
       droplinkId: droplinkId,
       ownerUsername: ownerUsername,
+      ownerEmail: ownerEmail,
       droplinkName: droplinkName
     },
     ReturnConsumedCapacity: "TOTAL"

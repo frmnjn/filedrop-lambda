@@ -6,7 +6,7 @@ exports.handler = (event, context, callback) => {
   let droplinkName = event.body.droplinkName;
   var params = {
     TableName: "filedrop.droplinks",
-    ProjectionExpression: "#ou, droplinkId, droplinkName",
+    ProjectionExpression: "#ou, droplinkId, droplinkName, ownerEmail",
     FilterExpression: "#ou = :ownerUsername AND #dn = :droplinkName",
     ExpressionAttributeNames: {
       "#ou": "ownerUsername",
@@ -36,7 +36,7 @@ exports.handler = (event, context, callback) => {
       } else {
         callback(null, {
           statusCode: 200,
-          body: { success: true }
+          body: { success: true, ownerEmail: data.Items[0].ownerEmail }
         });
         //   res.json({ success: true });
       }

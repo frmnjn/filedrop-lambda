@@ -4,8 +4,7 @@ var s3 = new AWS.S3();
 exports.handler = (event, context, callback) => {
   var params = {
     Bucket: "frmnjn-filedrop",
-    Prefix: event.body.username + "/" + event.body.droplinkName + "/",
-    Prefix: "frmnjn/test/"
+    Prefix: event.body.username + "/" + event.body.droplinkName + "/"
   };
 
   s3.listObjects(params, function(err, data) {
